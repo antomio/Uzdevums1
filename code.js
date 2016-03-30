@@ -3,65 +3,51 @@
 
 	$("#button").on("click", function(e) {
 		e.preventDefault();
-		myValue($( "#red" ).val());
-		myValue2($( "#black" ).val());
+
+		showPermutationResultFromInput("#red", "#alert");
+		showPermutationResultFromInput("#black", "#alert2");
+  });
 
 	$("#black").on("keyup", function() {
-		myValue2($( "#black" ).val());
-
+		showPermutationResultFromInput("#black", "#alert2", true);
 	});
-  });
 
 })(jQuery);
 
-	function myValue(s) {
+	function showPermutationResultFromInput(inputSelector, outputSelector, skipValueCheck) {
+		var result = permutation( $(inputSelector).val(), skipValueCheck );
+		$(outputSelector).text(result);
+	}
 
-		if (isNaN(s) || s < 1) {
-			alert("Tabulā ir 0 elementu!");	
+	function permutation(value, skipValueCheck) {
+		if(skipValueCheck == undefined) {
+			skipValueCheck = false;
+		}
+
+		if (isNaN(value) || (!skipValueCheck && value < 1)) {
+			return value;
+		}
+
+		for(var total = 1; value>0; value--){
+			total=total*value;
+		}
+
+		return total;
+	};
+
+	function myValue3(a) {
+		if (isNaN(a)) {
+			return;
 		}
 
 		else {
-			for(var total = 1; s>0; s--){
-				total=total*s;
+
+			for(var total = 1; value>0; value--){
+				total=total*value;
 			}
 
-		// console.log(total);
-		// console.log($("#black").val());
+			$("#alert2").text(total);
 
-		
-
-		$("#alert").text(total);
-
-		return total;
-
+			return total;
 		}
-
 	};
-
-	
-	function myValue2(a) {
-
-		console.log(a);
-
-		if (isNaN(a) || a < 1) {
-			alert("Tabulā ir 0 elementu!");
-		}
-
-		else {
-			for(var total = 1; a>0; a--){
-				total=total*a;
-			}
-
-		// console.log(total);
-
-		// console.log($("#black").val());
-
-		$("#alert2").text(total);
-
-		return total;
-
-		}
-
-	};
-
-
