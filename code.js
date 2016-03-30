@@ -12,11 +12,23 @@
 		showPermutationResultFromInput("#black", "#alert2", true);
 	});
 
-})(jQuery);
-
 	function showPermutationResultFromInput(inputSelector, outputSelector, skipValueCheck) {
-		var result = permutation( $(inputSelector).val(), skipValueCheck );
-		$(outputSelector).text(result);
+		if(!(inputSelector instanceof jQuery)) {
+			inputSelector = $(inputSelector);
+		}
+		if(!(outputSelector instanceof jQuery)) {
+			outputSelector = $(outputSelector);
+		}
+
+		var result = permutation( inputSelector.val(), skipValueCheck );
+		outputSelector.text(result);
+
+		if(result > 1000000) {
+			outputSelector.css("color", "blue");
+		}
+		else {
+			outputSelector.css("color", "black");
+		}
 	}
 
 	function permutation(value, skipValueCheck) {
@@ -51,3 +63,4 @@
 			return total;
 		}
 	};
+})(jQuery);
