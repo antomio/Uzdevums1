@@ -7,6 +7,10 @@
 	color: white;
 }
 p {
-	float: left;
-	margin: 1%;
+	display: inline;
+	margin: 4%;
 }
+#alert {
+	color: red;
+}
+
